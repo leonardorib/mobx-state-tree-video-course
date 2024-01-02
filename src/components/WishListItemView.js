@@ -36,6 +36,7 @@ const WishListItemView = (props) => {
 			<h3>{item.name}</h3>
 			<span>{item.price}</span>
 			<button onClick={onToggleEdit}>✎</button>
+			<button onClick={item.remove}>🗑</button>
 		</li>
 	);
 };
