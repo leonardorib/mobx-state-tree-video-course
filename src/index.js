@@ -28,7 +28,3 @@ root.render(
 		<App wishList={wishList} />
 	</React.StrictMode>
 );
-
-setInterval(() => {
-	wishList.items[0].changePrice(wishList.items[0].price + 1);
-}, 1000);
