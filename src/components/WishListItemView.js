@@ -4,7 +4,7 @@ import WishListItemEdit from "./WishListItemEdit";
 import { clone, getSnapshot, applySnapshot } from "mobx-state-tree";
 
 const WishListItemView = (props) => {
-	const { item } = props;
+	const { item, readonly } = props;
 	const [isEditing, setIsEditing] = React.useState(false);
 	const [cloneState, setCloneState] = React.useState(null);
 	const onToggleEdit = () => {
@@ -35,8 +35,12 @@ const WishListItemView = (props) => {
 			{item.image && <img src={item.image} alt={item.name} />}
 			<h3>{item.name}</h3>
 			<span>{item.price} €</span>
-			<button onClick={onToggleEdit}>✎</button>
-			<button onClick={item.remove}>🗑</button>
+			{!readonly && (
+				<span>
+					<button onClick={onToggleEdit}>✎</button>
+					<button onClick={item.remove}>🗑</button>
+				</span>
+			)}
 		</li>
 	);
 };
