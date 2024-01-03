@@ -46,4 +46,4 @@ const User = observer((props) => {
 	);
 });
 
-export default App;
+export default observer(App);
