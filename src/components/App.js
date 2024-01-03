@@ -17,6 +17,7 @@ function App(props) {
 				<img src={logo} className="App-logo" alt="logo" />
 				<h1>WishList</h1>
 			</header>
+			<button onClick={group.reload}>Reload</button>
 			<select onChange={onSelectUser}>
 				<option>- Select User -</option>
 				{Array.from(group.users.values()).map((user) => (
