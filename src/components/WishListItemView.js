@@ -34,7 +34,7 @@ const WishListItemView = (props) => {
 		<li className="item">
 			{item.image && <img src={item.image} alt={item.name} />}
 			<h3>{item.name}</h3>
-			<span>{item.price}</span>
+			<span>{item.price} €</span>
 			<button onClick={onToggleEdit}>✎</button>
 			<button onClick={item.remove}>🗑</button>
 		</li>
