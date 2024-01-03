@@ -3,41 +3,54 @@ import ReactDOM from "react-dom/client";
 import "./assets/index.css";
 import App from "./components/App";
 
-import { WishList } from "./models/WishList";
+import { Group } from "./models/Group";
 
 import { onSnapshot } from "mobx-state-tree";
 
 let initialState = {
-	items: [
-		{
-			name: "LEGO Mindstorms EV3",
-			price: 349.95,
-			image:
-				"https://images-na.ssl-images-amazon.com/images/I/71CpQw%2BufNL._SL1000_.jpg",
+	users: {
+		a342: {
+			id: "a342",
+			name: "Homer",
+			gender: "m",
 		},
-		{
-			name: "Miracles - C.S. Lewis",
-			price: 12.91,
-			image:
-				"https://images-na.ssl-images-amazon.com/images/I/41JC54HEroL._SX331_BO1,204,203,200_.jpg",
+		"5fc2": {
+			id: "5fc2",
+			name: "Marge",
+			gender: "f",
 		},
-	],
+		"663b": {
+			id: "663b",
+			name: "Bart",
+			gender: "m",
+		},
+		"65aa": {
+			id: "65aa",
+			name: "Maggie",
+			gender: "f",
+		},
+		ba32: {
+			id: "ba32",
+			name: "Lisa",
+			gender: "f",
+		},
+	},
 };
 
 if (localStorage.getItem("wishlistapp")) {
 	const json = JSON.parse(localStorage.getItem("wishlistapp"));
-	if (WishList.is(json)) initialState = json;
+	if (Group.is(json)) initialState = json;
 }
 
-const wishList = WishList.create(initialState);
+const group = Group.create(initialState);
 
-onSnapshot(wishList, (snapshot) => {
+onSnapshot(group, (snapshot) => {
 	localStorage.setItem("wishlistapp", JSON.stringify(snapshot));
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<App wishList={wishList} />
+		<App group={group} />
 	</React.StrictMode>
 );
