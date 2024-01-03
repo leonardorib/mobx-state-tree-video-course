@@ -78,6 +78,11 @@
 						"name": "LEGO Mindstorms EV3",
 						"price": 349.95,
 						"image": "https://images-na.ssl-images-amazon.com/images/I/71CpQw%2BufNL._SL1000_.jpg"
+					},
+					{
+						"name": "testtt",
+						"price": 0,
+						"image": ""
 					}
 				]
 			},

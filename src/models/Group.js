@@ -1,43 +1,30 @@
-import {
-	applySnapshot,
-	flow,
-	getSnapshot,
-	onSnapshot,
-	types,
-} from "mobx-state-tree";
+import { applySnapshot, flow, types } from "mobx-state-tree";
 import { WishList } from "./WishList";
+import { createStorable } from "./Storable";
 
-export const User = types
-	.model({
-		id: types.identifier,
-		name: types.string,
-		gender: types.enumeration("gender", ["m", "f"]),
-		wishList: types.optional(WishList, {}),
-		recipient: types.maybe(types.reference(types.late(() => User))),
-	})
-	.actions((self) => ({
-		getSuggestions: flow(function* () {
-			const response = yield window.fetch(
-				`http://localhost:3001/suggestions_${self.gender}`
-			);
-			const suggestions = yield response.json();
-			self.wishList.items.push(...suggestions);
-		}),
-		save: flow(function* save() {
-			try {
-				yield window.fetch(`http://localhost:3001/users/${self.id}`, {
-					method: "PUT",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(getSnapshot(self)),
-				});
-			} catch (e) {
-				console.error(`Uh oh, failed to save user ${self?.id}: `, e);
-			}
-		}),
-		afterCreate() {
-			onSnapshot(self, self.save);
-		},
-	}));
+export const UserBase = types.model({
+	id: types.identifier,
+	name: types.string,
+	gender: types.enumeration("gender", ["m", "f"]),
+	wishList: types.optional(WishList, {}),
+	recipient: types.maybe(types.reference(types.late(() => User))),
+});
+
+export const UserActions = types.model({}).actions((self) => ({
+	getSuggestions: flow(function* () {
+		const response = yield window.fetch(
+			`http://localhost:3001/suggestions_${self.gender}`
+		);
+		const suggestions = yield response.json();
+		self.wishList.items.push(...suggestions);
+	}),
+}));
+
+export const User = types.compose(
+	UserBase,
+	UserActions,
+	createStorable("users", "id")
+);
 
 export const Group = types
 	.model({
