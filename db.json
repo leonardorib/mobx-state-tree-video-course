@@ -23,8 +23,8 @@
 			"image": "https://images-na.ssl-images-amazon.com/images/I/71CpQw%2BufNL._SL1000_.jpg"
 		}
 	],
-	"users": {
-		"a342": {
+	"users": [
+		{
 			"id": "a342",
 			"name": "Homer",
 			"gender": "m",
@@ -36,35 +36,34 @@
 						"image": "https://images-na.ssl-images-amazon.com/images/I/91AFFK9fwkL._SY445_.jpg"
 					},
 					{
-						"name": "LEGO Mindstorms EV3",
-						"price": 349.95,
-						"image": "https://images-na.ssl-images-amazon.com/images/I/71CpQw%2BufNL._SL1000_.jpg"
-					}
-				]
-			},
-			"recipient": "65aa"
-		},
-		"5fc2": {
-			"id": "5fc2",
-			"name": "Marge",
-			"gender": "f",
-			"wishList": {
-				"items": [
-					{
-						"name": "The Notebook",
-						"price": 10.31,
-						"image": "https://images-na.ssl-images-amazon.com/images/I/51ZXkAJNYWL._AC_US218_.jpg"
+						"name": "Chocolate letter",
+						"price": 2,
+						"image": ""
 					},
 					{
 						"name": "LEGO Mindstorms EV3",
 						"price": 349.95,
 						"image": "https://images-na.ssl-images-amazon.com/images/I/71CpQw%2BufNL._SL1000_.jpg"
+					},
+					{
+						"name": "test",
+						"price": 3,
+						"image": ""
 					}
 				]
 			},
-			"recipient": "663b"
+			"recipient": "ba32"
 		},
-		"663b": {
+		{
+			"id": "5fc2",
+			"name": "Marge",
+			"gender": "f",
+			"wishList": {
+				"items": []
+			},
+			"recipient": "65aa"
+		},
+		{
 			"id": "663b",
 			"name": "Bart",
 			"gender": "m",
@@ -82,29 +81,18 @@
 					}
 				]
 			},
-			"recipient": "ba32"
+			"recipient": "a342"
 		},
-		"65aa": {
+		{
 			"id": "65aa",
 			"name": "Maggie",
 			"gender": "f",
 			"wishList": {
-				"items": [
-					{
-						"name": "The Notebook",
-						"price": 10.31,
-						"image": "https://images-na.ssl-images-amazon.com/images/I/51ZXkAJNYWL._AC_US218_.jpg"
-					},
-					{
-						"name": "LEGO Mindstorms EV3",
-						"price": 349.95,
-						"image": "https://images-na.ssl-images-amazon.com/images/I/71CpQw%2BufNL._SL1000_.jpg"
-					}
-				]
+				"items": []
 			},
 			"recipient": "5fc2"
 		},
-		"ba32": {
+		{
 			"id": "ba32",
 			"name": "Lisa",
 			"gender": "f",
@@ -122,7 +110,7 @@
 					}
 				]
 			},
-			"recipient": "a342"
+			"recipient": "663b"
 		}
-	}
+	]
 }

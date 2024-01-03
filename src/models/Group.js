@@ -1,4 +1,10 @@
-import { applySnapshot, flow, types } from "mobx-state-tree";
+import {
+	applySnapshot,
+	flow,
+	getSnapshot,
+	onSnapshot,
+	types,
+} from "mobx-state-tree";
 import { WishList } from "./WishList";
 
 export const User = types
@@ -17,6 +23,20 @@ export const User = types
 			const suggestions = yield response.json();
 			self.wishList.items.push(...suggestions);
 		}),
+		save: flow(function* save() {
+			try {
+				yield window.fetch(`http://localhost:3001/users/${self.id}`, {
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(getSnapshot(self)),
+				});
+			} catch (e) {
+				console.error(`Uh oh, failed to save user ${self?.id}: `, e);
+			}
+		}),
+		afterCreate() {
+			onSnapshot(self, self.save);
+		},
 	}));
 
 export const Group = types
@@ -35,10 +55,14 @@ export const Group = types
 					const response = yield window.fetch(`http://localhost:3001/users`, {
 						signal: controller ? controller.signal : undefined,
 					});
-					const json = yield response.json();
-					applySnapshot(self.users, json);
+					const users = yield response.json();
+					applySnapshot(
+						self.users,
+						users.reduce((base, user) => ({ ...base, [user.id]: user }), {})
+					);
 				} catch (e) {
 					console.log("aborted", e?.name);
+					console.log(e);
 				}
 			}),
 			reload() {
